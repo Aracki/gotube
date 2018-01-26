@@ -1,20 +1,17 @@
-package file
+package gotube
 
 import (
 	"fmt"
 	"os"
-
-	"google.golang.org/api/youtube/v3"
 )
 
 const (
-	snippetContentDetails = "snippet,contentDetails"
-	TempFileName          = "all_songs"
+	TempFileName = "all_songs"
 )
 
 // WriteAllSongsToFile goes through all playlists and write all songs to file
 // it returns pointer to file
-func WriteAllSongsToFile(service *youtube.Service) error {
+func (yt Youtube) WriteAllSongsToFile() error {
 
 	file, err := os.Create(TempFileName)
 	if err != nil {
@@ -22,7 +19,7 @@ func WriteAllSongsToFile(service *youtube.Service) error {
 	}
 
 	// get all playlists of mine
-	call := service.Playlists.List(snippetContentDetails)
+	call := yt.Service.Playlists.List(snippetContentDetails)
 	call = call.MaxResults(50).Mine(true)
 	response, err := call.Do()
 	if err != nil {
@@ -35,7 +32,7 @@ func WriteAllSongsToFile(service *youtube.Service) error {
 
 		pageToken := ""
 		for {
-			call := service.PlaylistItems.List(snippetContentDetails)
+			call := yt.Service.PlaylistItems.List(snippetContentDetails)
 			call = call.PlaylistId(pl.Id).MaxResults(50)
 			response, err := call.PageToken(pageToken).Do()
 			if err != nil {

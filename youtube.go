@@ -41,7 +41,7 @@ func readConfigFile(path string) (*oauth2.Config, error) {
 // New will read from config file
 // than make youtube client and service according to that client
 // returns pointer to youtube.Service
-func New() (*youtube.Service, error) {
+func New() (Youtube, error) {
 	ctx := context.Background()
 
 	// reads from config file
@@ -57,8 +57,8 @@ func New() (*youtube.Service, error) {
 	s, err := youtube.New(c)
 	if err != nil {
 		fmt.Println("Cannot make youtube client", err)
-		return nil, err
+		return Youtube{}, err
 	}
 
-	return s, err
+	return Youtube{s}, err
 }
