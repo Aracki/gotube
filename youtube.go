@@ -23,7 +23,7 @@ func readConfigFile(path string) (*oauth2.Config, error) {
 
 	b, err := ioutil.ReadFile(filePath)
 	if err != nil {
-		log.Fatalf("Unable to read client secret file: %v", err)
+		log.Printf("Unable to read client secret file: %v", err)
 		return nil, err
 	}
 
@@ -31,7 +31,7 @@ func readConfigFile(path string) (*oauth2.Config, error) {
 	// at ~/.credentials/youtube-go-quickstart.json
 	config, err := google.ConfigFromJSON(b, youtube.YoutubeReadonlyScope)
 	if err != nil {
-		log.Fatalf("Unable to parse client secret file to config: %v", err)
+		log.Printf("Unable to parse client secret file to config: %v", err)
 		return nil, err
 	}
 
@@ -48,10 +48,14 @@ func New() (Youtube, error) {
 	config, err := readConfigFile(clientSecretPath)
 	if err != nil {
 		fmt.Println("Unable to read/parse client secret file", err)
+		return Youtube{}, err
 	}
 
 	// making new client
-	c := client.GetClient(ctx, config)
+	c, err := client.GetClient(ctx, config)
+	if err != nil {
+		return Youtube{}, err
+	}
 
 	// making new service based on client
 	s, err := youtube.New(c)
@@ -60,5 +64,5 @@ func New() (Youtube, error) {
 		return Youtube{}, err
 	}
 
-	return Youtube{s}, err
+	return Youtube{s}, nil
 }
