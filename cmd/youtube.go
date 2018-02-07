@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"github.com/aracki/gotube"
 )
@@ -9,7 +10,10 @@ import (
 func main() {
 
 	// init youtube service
-	yt, _ := gotube.New()
+	yt, err := gotube.New()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// getting IvannSerbia channel info
 	info, _ := yt.ChannelInfo("IvannSerbia")
