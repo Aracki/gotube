@@ -1,6 +1,9 @@
 # gotube  [![Go Report Card](https://goreportcard.com/badge/github.com/aracki/gotube)](https://goreportcard.com/report/github.com/aracki/gotube)
 Library meant to improve working with youtube api in Go 
 
+## Installation
+`go get -u github.com/Aracki/gotube/...`
+
 ## Authorization
 
 Using OAuth 2.0 to Access Google APIs -> https://developers.google.com/identity/protocols/OAuth2
