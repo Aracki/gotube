@@ -46,24 +46,32 @@ func readConfigFile() (*oauth2.Config, error) {
 func New() (Youtube, error) {
 	ctx := context.Background()
 
+	log.Println("initializing new Gotube...")
+
 	// reads from config file
 	config, err := readConfigFile()
 	if err != nil {
-		fmt.Println("Unable to read/parse client secret file: ", err)
+		fmt.Println("unable to read/parse client secret file: ", err)
 		return Youtube{}, err
+	} else {
+		log.Println("successfully parsed config from client secret json file")
 	}
 
 	// making new client
 	c, err := client.GetClient(ctx, config)
 	if err != nil {
 		return Youtube{}, err
+	} else {
+		log.Println("successfully created youtube http client")
 	}
 
 	// making new service based on client
 	s, err := youtube.New(c)
 	if err != nil {
-		fmt.Println("Cannot make youtube client: ", err)
+		fmt.Println("cannot make youtube client: ", err)
 		return Youtube{}, err
+	} else {
+		log.Println("successfully created youtube service based on http client")
 	}
 
 	return Youtube{s}, nil
