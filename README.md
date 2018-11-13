@@ -8,15 +8,19 @@ Library meant to improve working with youtube api in Go
 
 Document which explains how does OAuth 2.0 works for Mobile & Desktop Apps to access Google APIs: https://developers.google.com/youtube/v3/guides/auth/installed-apps
 
+Steps for enabling Youtube API service:
+
 1. You need a Google Account to access the Google Developers Console, request an API key, and register your application.
-2. Create new project on https://console.developers.google.com 
-3. Go to Credentials/Create credentials/OAuth client ID.
-- Authorized redirect URIs are the endpoints to which the OAuth 2.0 server can send responses. (you can put ***http://localhost***)
-4. Download secret.json file and save it to /etc/youtube/client_secret.json
-5. Enable YouTube Data API v3
-6. Start golang app
-7. Go to the following link in your browser then type the authorization code  
-8. It redirects you to the http://localhost/?state=state-token&code=[code]
-9. Paste that *code* from URL into the terminal
-10. Saving credential file to: `~/.credentials/youtube-go-quickstart.json`. Gotube initialized!
+2. Create new project on https://console.developers.google.com
+3. Go to _Credentials_ -> _Create credentials_ -> _OAuth client ID_
+    - Select Web Application
+    - Authorized redirect URIs: _http://localhost_. (it is the endpoint to which the OAuth 2.0 server can send responses)
+4. Download `secret.json` file and save it to `/etc/youtube/client_secret.json`.
+5. Make sure YouTube Data API v3 is enabled.
+6. Start Go app.
+7. Stdout will print link. Open it up in your browser and select proper Youtube account  
+8. It redirects you to the http://localhost/?state=state-token&code=_[code]_
+9. Paste the *code* from the URL to the shell.
+10. It will save credential file to: `~/.credentials/youtube-go-quickstart.json`. 
+11. Gotube initialized!
   

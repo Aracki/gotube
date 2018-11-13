@@ -46,7 +46,7 @@ func readConfigFile() (*oauth2.Config, error) {
 func New() (Youtube, error) {
 	ctx := context.Background()
 
-	log.Println("initializing new Gotube...")
+	log.Println("initializing new gotube...")
 
 	// reads from config file
 	config, err := readConfigFile()
