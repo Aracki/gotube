@@ -8,9 +8,9 @@ import (
 	"google.golang.org/api/youtube/v3"
 )
 
-const (
-	snippetContentDetailsStatistics = "snippet,contentDetails,statistics"
-	snippetContentDetails           = "snippet,contentDetails"
+var (
+    snippetContentDetailsStatistics = []string{"snippet", "contentDetails", "statistics"}
+    snippetContentDetails           = []string{"snippet", "contentDetails"}
 )
 
 type Youtube struct {
